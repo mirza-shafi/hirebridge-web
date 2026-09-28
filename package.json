@@ -12,11 +12,13 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "format": "prettier --write .",
-    "api:types": "openapi-typescript http://localhost:8000/openapi.json -o src/lib/api/schema.d.ts",
-    "check": "npm run lint && npm run typecheck && npm run test"
+    "api:types": "openapi-typescript ../hirebridge-api/openapi.json -o src/lib/api/schema.d.ts",
+    "check": "npm run lint && npm run typecheck && npm run test",
+    "api:types:live": "openapi-typescript http://localhost:8000/openapi.json -o src/lib/api/schema.d.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.0",
+    "@sentry/nextjs": "^8.47.0",
     "@tanstack/react-query": "^5.62.0",
     "@tanstack/react-query-devtools": "^5.62.0",
     "clsx": "^2.1.1",
@@ -30,6 +32,7 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
     "@playwright/test": "^1.49.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@testing-library/jest-dom": "^6.6.3",

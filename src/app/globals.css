@@ -31,6 +31,19 @@
   --score-weak: oklch(60% 0.03 250);
 
   --radius: 0.5rem;
+
+  /* Type scale — docs/04-design-system.md §3. Line-height stays generous:
+     CV and JD text is dense and gets read carefully. */
+  --text-display: 2.25rem;
+  --text-h1: 1.75rem;
+  --text-h2: 1.375rem;
+  --text-h3: 1.125rem;
+  --text-body: 0.9375rem;
+  --text-small: 0.8125rem;
+
+  /* Row density — a recruiter scans many rows, a candidate does not. */
+  --row-candidate: 3.5rem;
+  --row-employer: 3rem;
 }
 
 .dark {
@@ -83,6 +96,14 @@
   --color-score-strong: var(--score-strong);
   --color-score-mid: var(--score-mid);
   --color-score-weak: var(--score-weak);
+  --text-display: var(--text-display);
+  --text-h1: var(--text-h1);
+  --text-h2: var(--text-h2);
+  --text-h3: var(--text-h3);
+  --text-body: var(--text-body);
+  --text-small: var(--text-small);
+  --spacing-row-candidate: var(--row-candidate);
+  --spacing-row-employer: var(--row-employer);
   --radius-base: var(--radius);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
@@ -107,4 +128,9 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Reading surfaces (job descriptions, report narrative) cap at 72ch. */
+.prose-reading {
+  max-width: 72ch;
 }

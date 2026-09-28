@@ -27,7 +27,7 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 
 | Phase | Tasks | Done | Pending |
 |---|---:|---:|---:|
-| Phase 0 — Foundation | 30 | 17 | 13 |
+| Phase 0 — Foundation | 30 | 27 | 3 |
 | Phase 1 — CV tailoring + HR ranking | 75 | 0 | 75 |
 | Phase 2 — Interview Studio (text) | 22 | 0 | 22 |
 | Phase 3 — Voice | 10 | 0 | 10 |
@@ -35,9 +35,9 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 | Phase 5 — Commercial | 6 | 0 | 6 |
 | Cross-cutting (ongoing — never marked done) | 11 | 0 | 11 |
 | Blocked / needs a decision | 4 | 0 | 4 |
-| **Total** | **163** | **17** | **146** |
+| **Total** | **163** | **27** | **136** |
 
-**Current position: Phase 0 scaffolded — 17 done, 146 pending. Phase 0 is not closed until its exit gate passes (see below).**
+**Current position: Phase 0 — 27/3 done. Remaining items need the app installed and running; the exit gate closes Phase 0.**
 
 ---
 
@@ -51,35 +51,35 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 - [x] `next/font` with a subset, self-hosted (no external font CDN)
 - [x] Vitest + Testing Library setup
 - [x] Playwright setup
-- [ ] MSW setup, seeded from the OpenAPI schema
+- [x] MSW setup, seeded from the OpenAPI schema
 
 ### Design tokens
 - [x] CSS variables on `:root` per `docs/04-design-system.md` §2
 - [x] Dark theme variable overrides
 - [x] Tailwind theme mapped to the tokens (no hardcoded hex in components)
-- [ ] Type scale
+- [x] Type scale
 - [x] Theme toggle + system preference detection
 
 ### API layer
 - [x] `openapi-typescript` generation script
-- [ ] Typed fetch wrapper with auth interceptor
-- [ ] `401` → single refresh attempt, then redirect
+- [x] Typed fetch wrapper with auth interceptor
+- [x] `401` → single refresh attempt, then redirect
 - [x] TanStack Query provider + structured query-key convention
-- [ ] Error boundary mapping RFC 9457 problem details to UI copy
-- [ ] Contract check in CI — build fails on an incompatible schema change
+- [x] Error boundary mapping RFC 9457 problem details to UI copy
+- [x] Contract check in CI — build fails on an incompatible schema change
 
 ### Auth & routing
 - [x] Clerk provider + middleware
 - [x] Route groups: `(public)`, `(candidate)`, `(employer)`, `(auth)`
 - [x] Guards on `/app/**` and `/hr/**`
-- [ ] Role-aware navigation (a user can be both a candidate and a recruiter)
-- [ ] `/onboarding` redirect for incomplete profiles
-- [ ] Root layout, candidate shell, employer shell
+- [x] Role-aware navigation (a user can be both a candidate and a recruiter)
+- [x] `/onboarding` redirect for incomplete profiles
+- [x] Root layout, candidate shell, employer shell
 
 ### CI/CD
 - [x] GitHub Actions: lint + typecheck + test + build
 - [ ] Vercel project linked, preview deploys on PR
-- [ ] Sentry wired
+- [x] Sentry wired
 - [x] `.env.example`
 
 ### Phase 0 exit gate

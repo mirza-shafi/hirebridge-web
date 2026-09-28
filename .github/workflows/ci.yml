@@ -23,3 +23,25 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
+
+  contract:
+    # The API repo commits openapi.json; this proves the generated client is in sync with it.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: mirza-shafi/hirebridge-api
+          path: hirebridge-api
+          sparse-checkout: openapi.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generated types match the API schema
+        run: |
+          npm run api:types
+          git diff --exit-code src/lib/api/schema.d.ts \
+            || { echo '::error::schema.d.ts is stale — run `npm run api:types` and commit it'; exit 1; }
