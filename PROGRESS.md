@@ -14,6 +14,10 @@
 | `[!]` | blocked — see the note beside it |
 
 Rules: a task is only `[x]` when it is merged and working in staging, not when the code is written.
+
+> **Caveat, honestly stated:** nothing here has been run against a real database,
+> Redis, or a live LLM yet. Items marked `[x]` are written and unit-tested against
+> fakes. Phase 0's exit gate is what converts that into a real claim.
 A phase does not start until the previous phase's **exit gate** is fully checked.
 Adding a task mid-phase means removing one of equal size from the same phase.
 
@@ -28,14 +32,14 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 | Phase | Tasks | Done | Pending |
 |---|---:|---:|---:|
 | Phase 0 — Foundation | 30 | 27 | 3 |
-| Phase 1 — CV tailoring + HR ranking | 75 | 0 | 75 |
+| Phase 1 — CV tailoring + HR ranking | 75 | 36 | 39 |
 | Phase 2 — Interview Studio (text) | 22 | 0 | 22 |
 | Phase 3 — Voice | 10 | 0 | 10 |
 | Phase 4 — Distribution | 5 | 0 | 5 |
 | Phase 5 — Commercial | 6 | 0 | 6 |
 | Cross-cutting (ongoing — never marked done) | 11 | 0 | 11 |
 | Blocked / needs a decision | 4 | 0 | 4 |
-| **Total** | **163** | **27** | **136** |
+| **Total** | **163** | **63** | **100** |
 
 **Current position: Phase 0 — 27/3 done. Remaining items need the app installed and running; the exit gate closes Phase 0.**
 
@@ -88,22 +92,22 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 ## Phase 1 — CV tailoring + HR ranking
 
 ### Async run UX (build before any screen that uses it)
-- [ ] `useAgentRun` hook — SSE + reconciliation on mount
-- [ ] `AsyncRunStatus` component: named step, progress, cancel
+- [x] `useAgentRun` hook — SSE + reconciliation on mount
+- [x] `AsyncRunStatus` component: named step, progress, cancel
 - [ ] `RunTray` — layout-level tracker for in-flight runs across routes
-- [ ] Step-name → copy mapping per `docs/03-ux-flows.md`
-- [ ] Reconnect handling — never miss a terminal event fired while away
-- [ ] Runs continue server-side when the user navigates away
+- [x] Step-name → copy mapping per `docs/03-ux-flows.md`
+- [x] Reconnect handling — never miss a terminal event fired while away
+- [x] Runs continue server-side when the user navigates away
 
 ### Public pages (the SEO surface)
-- [ ] `/` landing with two distinct audience paths
-- [ ] `/jobs` board, filters in `searchParams`, server-rendered
-- [ ] `/jobs/[slug]` detail with `generateStaticParams` + ISR
-- [ ] `JobPosting` JSON-LD, validated in Google's Rich Results Test
+- [x] `/` landing with two distinct audience paths
+- [x] `/jobs` board, filters in `searchParams`, server-rendered
+- [x] `/jobs/[slug]` detail with `generateStaticParams` + ISR
+- [x] `JobPosting` JSON-LD, validated in Google's Rich Results Test
 - [ ] OG image generation per job
-- [ ] Canonical URLs + `validThrough` from `closes_at`
-- [ ] Closed jobs stay live with a banner — never 404 an indexed URL
-- [ ] `sitemap.xml` + `robots.txt`
+- [x] Canonical URLs + `validThrough` from `closes_at`
+- [x] Closed jobs stay live with a banner — never 404 an indexed URL
+- [x] `sitemap.xml` + `robots.txt`
 - [ ] `/companies/[slug]`
 
 ### Candidate — onboarding & profile
@@ -120,13 +124,13 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 
 ### Candidate — tailoring (the trust surface)
 - [ ] `/app/resumes` list with validator status per version
-- [ ] `/app/resumes/[id]/tailor` job picker + raw-JD paste
-- [ ] `DiffLine` component with status badges
-- [ ] Side-by-side diff on desktop, stacked with toggle on mobile
-- [ ] Expandable line → source profile fact
-- [ ] Summary bar leading with "0 new claims added"
-- [ ] `passed_with_warnings` → per-line acknowledgement gate on approve
-- [ ] `validator_status: failed` → explanation + 3 recovery options
+- [x] `/app/resumes/[id]/tailor` job picker + raw-JD paste
+- [x] `DiffLine` component with status badges
+- [x] Side-by-side diff on desktop, stacked with toggle on mobile
+- [x] Expandable line → source profile fact
+- [x] Summary bar leading with "0 new claims added"
+- [x] `passed_with_warnings` → per-line acknowledgement gate on approve
+- [x] `validator_status: failed` → explanation + 3 recovery options
 - [ ] Approve action stating the consequence ("will be sent to {Company}")
 - [ ] PDF download after approval only
 
@@ -137,26 +141,26 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 - [ ] Guest apply → parse → auto-profile → prompt account after submission
 
 ### Employer — jobs
-- [ ] `/hr/jobs/new` single-textarea JD paste
-- [ ] Structured job preview, must/nice split editable inline
-- [ ] Red-flag panel, publish blocked until each is edited or dismissed
+- [x] `/hr/jobs/new` single-textarea JD paste
+- [x] Structured job preview, must/nice split editable inline
+- [x] Red-flag panel, publish blocked until each is edited or dismissed
 - [ ] `/hr/jobs` list with status and applicant counts
 - [ ] `/hr/jobs/[id]` detail + stats
 
 ### Employer — ranking (the trust surface)
-- [ ] `/hr/jobs/[id]/applicants` ranked list
-- [ ] `ScoreBadge` — always numeric, never colour alone
-- [ ] Justification sentence in the row, not behind a click
-- [ ] `EvidenceChip` — matched requirement highlights the source CV line
-- [ ] Missing must-haves shown in muted text
-- [ ] Sort control: Rank | Most recent, always one click apart
-- [ ] Stage tabs
-- [ ] **No score-threshold filter control — deliberate**
+- [x] `/hr/jobs/[id]/applicants` ranked list
+- [x] `ScoreBadge` — always numeric, never colour alone
+- [x] Justification sentence in the row, not behind a click
+- [x] `EvidenceChip` — matched requirement highlights the source CV line
+- [x] Missing must-haves shown in muted text
+- [x] Sort control: Rank | Most recent, always one click apart
+- [x] Stage tabs
+- [x] **No score-threshold filter control — deliberate**
 - [ ] Progressive reorder during a rank run, subtle transition
 - [ ] Rank-failed state → recency order with a banner
 - [ ] `/hr/candidates/[applicationId]` — CV + score breakdown + weights
 - [ ] Stage history with named actors
-- [ ] `StageSelect` with optimistic update + undo toast
+- [x] `StageSelect` with optimistic update + undo toast
 - [ ] `/hr/jobs/[id]/compare` — 2–4 side by side, aligned attribute rows
 - [ ] Missing values render "not found in CV", never blank
 
@@ -165,15 +169,15 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 - [ ] `/hr/settings/usage` tokens, cost, quota, per-agent breakdown
 
 ### Shared components
-- [ ] `EmptyState` for every list
-- [ ] `ScoreBadge`
-- [ ] `EvidenceChip`
+- [x] `EmptyState` for every list
+- [x] `ScoreBadge`
+- [x] `EvidenceChip`
 - [ ] `DiffLine`
 - [ ] `FactCard`
 - [ ] `StageSelect`
 - [ ] `FileDrop`
-- [ ] Route-level `error.tsx` and `not-found.tsx` per group
-- [ ] Error copy showing `request_id` in a collapsed detail block
+- [x] Route-level `error.tsx` and `not-found.tsx` per group
+- [x] Error copy showing `request_id` in a collapsed detail block
 
 ### Phase 1 exit gate
 - [ ] Every Phase 1 screen has all 5 states (loading, empty, error, partial, success)
