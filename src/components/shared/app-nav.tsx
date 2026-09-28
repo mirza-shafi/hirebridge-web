@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth, UserButton } from "@clerk/nextjs";
+import { DEV_AUTH } from "@/lib/auth/dev";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
@@ -36,7 +37,7 @@ export function AppNav({ items, context }: { items: NavItem[]; context: "candida
 
   const otherHref = context === "candidate" ? "/hr/dashboard" : "/app/dashboard";
   const otherLabel = context === "candidate" ? "Employer view" : "Job seeker view";
-  const showSwitch = context === "employer" || Boolean(orgId);
+  const showSwitch = context === "employer" || DEV_AUTH || Boolean(orgId);
 
   return (
     <header className="border-b border-border bg-surface">
@@ -76,7 +77,13 @@ export function AppNav({ items, context }: { items: NavItem[]; context: "candida
             </Link>
           )}
           <ThemeToggle />
-          <UserButton />
+          {DEV_AUTH ? (
+            <span className="rounded-full bg-warning-bg px-2 py-0.5 text-xs text-warning">
+              demo
+            </span>
+          ) : (
+            <UserButton />
+          )}
         </div>
       </div>
     </header>

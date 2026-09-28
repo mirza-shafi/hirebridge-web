@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { DEV_AUTH } from "@/lib/auth/dev";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -17,13 +18,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={inter.variable}>
-          <Providers>{children}</Providers>
-        </body>
-      </html>
-    </ClerkProvider>
+  const tree = (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.variable}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
   );
+
+  // ClerkProvider validates its publishable key at render, so in demo mode it is left out
+  // rather than fed a placeholder.
+  return DEV_AUTH ? tree : <ClerkProvider>{tree}</ClerkProvider>;
 }

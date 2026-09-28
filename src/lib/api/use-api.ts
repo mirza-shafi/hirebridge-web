@@ -4,6 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, apiFetch, type RequestOptions } from "@/lib/api/client";
+import { DEV_AUTH, DEV_TOKEN } from "@/lib/auth/dev";
 
 /**
  * Authenticated client-side fetch.
@@ -13,7 +14,7 @@ import { ApiError, apiFetch, type RequestOptions } from "@/lib/api/client";
  * (docs/01-frontend-architecture.md §4). No refresh loop.
  */
 export function useApi() {
-  const { getToken } = useAuth();
+  const getToken = useTokenSource();
   const router = useRouter();
 
   return useCallback(
@@ -22,9 +23,9 @@ export function useApi() {
       try {
         return await apiFetch<T>(path, { ...options, token });
       } catch (error) {
-        if (!(error instanceof ApiError) || error.status !== 401) throw error;
+        if (!(error instanceof ApiError) || error.status !== 401 || DEV_AUTH) throw error;
 
-        const fresh = await getToken({ skipCache: true });
+        const fresh = await getToken(true);
         if (!fresh) {
           router.push("/sign-in");
           throw error;
@@ -40,5 +41,20 @@ export function useApi() {
       }
     },
     [getToken, router],
+  );
+}
+
+/**
+ * `useAuth` throws without a ClerkProvider above it, and demo mode deliberately has none.
+ * The hook is still called unconditionally so hook order is identical in both modes.
+ */
+function useTokenSource(): (skipCache?: boolean) => Promise<string | null> {
+  const auth = useAuth();
+  return useCallback(
+    async (skipCache = false) => {
+      if (DEV_AUTH) return DEV_TOKEN;
+      return auth.getToken({ skipCache });
+    },
+    [auth],
   );
 }
