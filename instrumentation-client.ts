@@ -1,5 +1,11 @@
 import * as Sentry from "@sentry/nextjs";
 
+/**
+ * Next.js loads this file for browser instrumentation.
+ *
+ * Do not import it from a client component instead: that resolves `@sentry/nextjs` to its
+ * server entry and drags `@sentry/node` and OpenTelemetry into the browser bundle.
+ */
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 if (dsn) {

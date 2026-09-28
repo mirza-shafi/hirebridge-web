@@ -5,10 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { ApiError } from "@/lib/api/client";
 
-if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
-  void import("../../sentry.client.config");
-}
-
 export function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
     () =>
