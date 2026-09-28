@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* Design tokens — docs/04-design-system.md §2.
+   Never hardcode a hex in a component. Status is never conveyed by colour alone. */
+
+:root {
+  --bg: oklch(99% 0 0);
+  --surface: oklch(100% 0 0);
+  --surface-raised: oklch(97.5% 0.003 250);
+  --border: oklch(92% 0.004 250);
+  --border-strong: oklch(84% 0.006 250);
+
+  --text: oklch(21% 0.01 250);
+  --text-muted: oklch(48% 0.012 250);
+  --text-subtle: oklch(62% 0.01 250);
+
+  --primary: oklch(52% 0.16 255);
+  --primary-fg: oklch(99% 0 0);
+
+  --success: oklch(56% 0.13 155);
+  --success-bg: oklch(95% 0.04 155);
+  --warning: oklch(64% 0.14 75);
+  --warning-bg: oklch(96% 0.05 75);
+  --danger: oklch(55% 0.19 25);
+  --danger-bg: oklch(96% 0.04 25);
+  --info: oklch(56% 0.12 240);
+  --info-bg: oklch(96% 0.03 240);
+
+  --score-strong: oklch(56% 0.13 155);
+  --score-mid: oklch(64% 0.14 75);
+  --score-weak: oklch(60% 0.03 250);
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --bg: oklch(17% 0.008 250);
+  --surface: oklch(21% 0.009 250);
+  --surface-raised: oklch(25% 0.01 250);
+  --border: oklch(30% 0.012 250);
+  --border-strong: oklch(38% 0.014 250);
+
+  --text: oklch(96% 0.003 250);
+  --text-muted: oklch(72% 0.012 250);
+  --text-subtle: oklch(58% 0.012 250);
+
+  --primary: oklch(68% 0.14 255);
+  --primary-fg: oklch(17% 0.008 250);
+
+  --success: oklch(70% 0.14 155);
+  --success-bg: oklch(28% 0.05 155);
+  --warning: oklch(76% 0.13 75);
+  --warning-bg: oklch(30% 0.05 75);
+  --danger: oklch(68% 0.17 25);
+  --danger-bg: oklch(29% 0.06 25);
+  --info: oklch(70% 0.12 240);
+  --info-bg: oklch(28% 0.04 240);
+
+  --score-strong: oklch(70% 0.14 155);
+  --score-mid: oklch(76% 0.13 75);
+  --score-weak: oklch(62% 0.02 250);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-score-strong: var(--score-strong);
+  --color-score-mid: var(--score-mid);
+  --color-score-weak: var(--score-weak);
+  --radius-base: var(--radius);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
