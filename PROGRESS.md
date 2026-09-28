@@ -27,7 +27,7 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 
 | Phase | Tasks | Done | Pending |
 |---|---:|---:|---:|
-| Phase 0 — Foundation | 30 | 0 | 30 |
+| Phase 0 — Foundation | 30 | 17 | 13 |
 | Phase 1 — CV tailoring + HR ranking | 75 | 0 | 75 |
 | Phase 2 — Interview Studio (text) | 22 | 0 | 22 |
 | Phase 3 — Voice | 10 | 0 | 10 |
@@ -35,52 +35,52 @@ echo "pending: $(grep -c '^- \[ \]' PROGRESS.md)  done: $(grep -c '^- \[x\]' PRO
 | Phase 5 — Commercial | 6 | 0 | 6 |
 | Cross-cutting (ongoing — never marked done) | 11 | 0 | 11 |
 | Blocked / needs a decision | 4 | 0 | 4 |
-| **Total** | **163** | **0** | **163** |
+| **Total** | **163** | **17** | **146** |
 
-**Current position: Phase 0 — Foundation. Nothing started yet; all 163 tasks pending.**
+**Current position: Phase 0 scaffolded — 17 done, 146 pending. Phase 0 is not closed until its exit gate passes (see below).**
 
 ---
 
 ## Phase 0 — Foundation
 
 ### Scaffold & tooling
-- [ ] `create-next-app` — App Router, TypeScript, Tailwind
-- [ ] ESLint + Prettier + strict `tsconfig`
-- [ ] Folder structure per `docs/01-frontend-architecture.md` §2
+- [x] `create-next-app` — App Router, TypeScript, Tailwind
+- [x] ESLint + Prettier + strict `tsconfig`
+- [x] Folder structure per `docs/01-frontend-architecture.md` §2
 - [ ] shadcn/ui init + base component set
-- [ ] `next/font` with a subset, self-hosted (no external font CDN)
-- [ ] Vitest + Testing Library setup
-- [ ] Playwright setup
+- [x] `next/font` with a subset, self-hosted (no external font CDN)
+- [x] Vitest + Testing Library setup
+- [x] Playwright setup
 - [ ] MSW setup, seeded from the OpenAPI schema
 
 ### Design tokens
-- [ ] CSS variables on `:root` per `docs/04-design-system.md` §2
-- [ ] Dark theme variable overrides
-- [ ] Tailwind theme mapped to the tokens (no hardcoded hex in components)
+- [x] CSS variables on `:root` per `docs/04-design-system.md` §2
+- [x] Dark theme variable overrides
+- [x] Tailwind theme mapped to the tokens (no hardcoded hex in components)
 - [ ] Type scale
-- [ ] Theme toggle + system preference detection
+- [x] Theme toggle + system preference detection
 
 ### API layer
-- [ ] `openapi-typescript` generation script
+- [x] `openapi-typescript` generation script
 - [ ] Typed fetch wrapper with auth interceptor
 - [ ] `401` → single refresh attempt, then redirect
-- [ ] TanStack Query provider + structured query-key convention
+- [x] TanStack Query provider + structured query-key convention
 - [ ] Error boundary mapping RFC 9457 problem details to UI copy
 - [ ] Contract check in CI — build fails on an incompatible schema change
 
 ### Auth & routing
-- [ ] Clerk provider + middleware
-- [ ] Route groups: `(public)`, `(candidate)`, `(employer)`, `(auth)`
-- [ ] Guards on `/app/**` and `/hr/**`
+- [x] Clerk provider + middleware
+- [x] Route groups: `(public)`, `(candidate)`, `(employer)`, `(auth)`
+- [x] Guards on `/app/**` and `/hr/**`
 - [ ] Role-aware navigation (a user can be both a candidate and a recruiter)
 - [ ] `/onboarding` redirect for incomplete profiles
 - [ ] Root layout, candidate shell, employer shell
 
 ### CI/CD
-- [ ] GitHub Actions: lint + typecheck + test + build
+- [x] GitHub Actions: lint + typecheck + test + build
 - [ ] Vercel project linked, preview deploys on PR
 - [ ] Sentry wired
-- [ ] `.env.example`
+- [x] `.env.example`
 
 ### Phase 0 exit gate
 - [ ] A signed-in user sees data from an authenticated API call in staging
