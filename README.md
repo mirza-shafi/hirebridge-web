@@ -2,6 +2,10 @@
 
 Frontend for HireBridge — Next.js 15 App Router, TypeScript, Tailwind, shadcn/ui.
 
+## Progress
+
+[`PROGRESS.md`](PROGRESS.md) — the task tracker. Start there to see what is done and what is next.
+
 ## Documentation
 
 | Doc | Read it for |
